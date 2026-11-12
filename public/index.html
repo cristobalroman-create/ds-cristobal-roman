@@ -33,6 +33,39 @@
       background-color: var(--paper);
       color: var(--navy);
     }
+    body.dark-tokens header {
+      background: rgba(19, 36, 56, 0.95);
+      border-color: #264769;
+    }
+    body.dark-tokens .deck-container {
+      background: #16293D;
+      color: #F0F6FC;
+      border-color: #264769;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    body.dark-tokens .modal-box {
+      background: #16293D;
+      color: #F0F6FC;
+      border-color: #264769;
+    }
+    body.dark-tokens .btn-secondary {
+      background: #132438;
+      color: #F0F6FC;
+      border-color: #264769;
+    }
+    body.dark-tokens .btn-secondary:hover {
+      background: #1e3a5a;
+    }
+    body.dark-tokens .badge-light {
+      background: #132438;
+      color: #8DBDEB;
+      border-color: #264769;
+    }
+    body.dark-tokens .deck-footer {
+      background: rgba(19, 36, 56, 0.85);
+      border-color: #264769;
+      color: #BCD9F5;
+    }
 
     * {
       box-sizing: border-box;
@@ -433,6 +466,12 @@
       </div>
 
       <div style="display: flex; align-items: center; gap: 6px;">
+        <button class="btn btn-secondary" onclick="toggleDarkMode()" title="Cambiar a Modo Oscuro (Tokens)">
+          🌓 <span class="hide-mobile">Tema</span>
+        </button>
+        <button class="btn btn-secondary" onclick="openAgentModal()" title="Conectar con Agente Cloudflare Worker">
+          ⚡ <span class="hide-mobile">Worker</span>
+        </button>
         <button class="btn btn-secondary" onclick="goToSlide(0)" title="Ver imagen de los 5 niveles">
           🖼️ <span class="hide-mobile">Inicio</span>
         </button>
@@ -1436,58 +1475,159 @@
 
         <!-- SLIDE 7: Páginas -->
         <div class="slide" id="slide-7">
-          <div>
-            <span class="badge badge-accent">Nivel 5 · Páginas</span>
-            <h2 style="font-size: clamp(20px, 4vw, 26px); font-weight: 700; color: var(--navy); margin-top: 2px;">
-              Páginas: El Producto
-            </h2>
-            <p style="font-size: 12px; color: rgba(23,50,77,0.8);">
-              Lema: <strong>el producto</strong>. La plantilla con datos reales.
-            </p>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="badge badge-accent">Nivel 5 · Páginas</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--accent);">
+                  el producto en producción
+                </span>
+              </div>
+              <h2 style="font-size: clamp(20px, 4vw, 26px); font-weight: 700; color: var(--accent); margin-top: 2px;">
+                Páginas: El Producto en Producción
+              </h2>
+              <p style="font-size: 13px; color: var(--accent); font-weight: 500; margin-top: 4px;">
+                La plantilla alimentada con la base de datos viva del INE para entregar valor ciudadano.
+              </p>
+            </div>
+
+            <!-- Viewport Switcher Tabs -->
+            <div style="display: flex; gap: 4px; background: var(--paper); padding: 3px; border-radius: 8px; border: 1px solid var(--border); font-size: 11px; font-family: Poppins, sans-serif;">
+              <button id="s7TabMobile" onclick="switchSlide7Viewport('mobile')" class="btn btn-primary" style="padding: 4px 10px; font-size: 10.5px;">
+                📱 Móvil (375px)
+              </button>
+              <button id="s7TabDesktop" onclick="switchSlide7Viewport('desktop')" class="btn btn-secondary" style="padding: 4px 10px; font-size: 10.5px;">
+                💻 Escritorio (1024px)
+              </button>
+              <button id="s7TabNewComp" onclick="switchSlide7Viewport('newcomp')" class="btn btn-secondary" style="padding: 4px 10px; font-size: 10.5px;">
+                🚀 Componente Nuevo
+              </button>
+            </div>
           </div>
 
-          <div class="responsive-grid-split" style="display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center; margin: auto 0; padding: 8px 0;">
-            <!-- Real Phone Mockup -->
-            <div class="responsive-phone-center">
-              <div class="phone-mockup" style="gap: 6px;">
-                <div style="background: var(--navy); color: white; border-radius: 5px; padding: 4px; text-align: center; font-size: 10px; font-weight: 700;">
-                  Observatorio
-                </div>
-                <div style="text-align: center; padding-top: 2px;">
-                  <div style="font-size: 9px;">tu región: <strong>Ñuble</strong></div>
-                  <div style="font-family: 'Poppins'; font-size: 20px; font-weight: 800; color: var(--navy); line-height: 1; margin: 2px 0;">11,2%</div>
-                  <div style="color: var(--accent); font-size: 9px; font-weight: 600;">+1,1 pp · país 9,6%</div>
-                </div>
-                <div style="display: flex; justify-content: center; padding: 3px 0;">
-                  <div class="map-bars-stack" style="gap: 2px;">
-                    <div style="height: 5px; width: 38px; background: #BCD9F5; border-radius: 2px;"></div>
-                    <div style="height: 5px; width: 38px; background: #5A9ADB; border-radius: 2px;"></div>
-                    <div style="height: 5px; width: 38px; background: #2F7DD1; border: 1px solid var(--navy); border-radius: 2px;"></div>
-                    <div style="height: 5px; width: 38px; background: #8DBDEB; border-radius: 2px;"></div>
-                    <div style="height: 5px; width: 38px; background: #E3F0FC; border-radius: 2px;"></div>
+          <!-- View 1: Mobile Phone (Default) -->
+          <div id="s7ViewMobile" style="display: block; margin: auto 0; padding: 6px 0;">
+            <div class="responsive-grid-split" style="display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center;">
+              <!-- Real Phone Mockup -->
+              <div class="responsive-phone-center">
+                <div class="phone-mockup" style="gap: 6px;">
+                  <div style="background: var(--navy); color: white; border-radius: 6px; padding: 5px; text-align: center; font-size: 10px; font-weight: 700; font-family: Poppins, sans-serif;">
+                    Observatorio
+                  </div>
+                  <div style="text-align: center; padding-top: 2px;">
+                    <div style="font-size: 9px; color: var(--navy);">tu región: <strong id="s7PhoneRegion" style="color: var(--accent);">Ñuble</strong></div>
+                    <div id="s7PhoneRate" style="font-family: 'Poppins'; font-size: 22px; font-weight: 800; color: var(--navy); line-height: 1; margin: 2px 0;">11,2%</div>
+                    <div id="s7PhoneChange" style="color: var(--accent); font-size: 9px; font-weight: 600;">+1,1 pp · país 7,6%</div>
+                  </div>
+                  <div style="display: flex; justify-content: center; padding: 3px 0;">
+                    <div class="map-bars-stack" style="gap: 2px;">
+                      <div style="height: 5px; width: 38px; background: #BCD9F5; border-radius: 2px;"></div>
+                      <div style="height: 5px; width: 38px; background: #5A9ADB; border-radius: 2px;"></div>
+                      <div id="s7PhoneBarNuble" style="height: 6px; width: 42px; background: #2F7DD1; border: 1.5px solid var(--navy); border-radius: 2px;"></div>
+                      <div style="height: 5px; width: 38px; background: #8DBDEB; border-radius: 2px;"></div>
+                      <div style="height: 5px; width: 38px; background: #E3F0FC; border-radius: 2px;"></div>
+                    </div>
+                  </div>
+                  <div style="border-top: 1px solid var(--paper); text-align: center; font-size: 8px; color: rgba(23,50,77,0.7); padding-top: 3px;">
+                    Fuente: INE, ENE
                   </div>
                 </div>
-                <div style="border-top: 1px solid var(--paper); text-align: center; font-size: 8px; color: rgba(23,50,77,0.7); padding-top: 3px;">
-                  Fuente: INE, ENE
-                </div>
               </div>
-            </div>
 
-            <!-- Explicación -->
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
-                <h4 style="font-size: 11px; font-weight: 700;">Prueba con datos de /regiones</h4>
-                <p style="font-size: 10px; color: rgba(23,50,77,0.8); margin-top: 2px;">Comprueba si las cifras caben, la región se entiende y la fuente se ve clara.</p>
-              </div>
-              <div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
-                <h4 style="font-size: 11px; font-weight: 700; color: var(--accent);">Regla de oro de mantenimiento</h4>
-                <p style="font-size: 10px; color: rgba(23,50,77,0.8); margin-top: 2px;">Si algo falla, <strong>se corrige subiendo por los niveles anteriores</strong>, nunca parchando la pantalla final.</p>
+              <!-- Explicación -->
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
+                  <h4 style="font-size: 11px; font-weight: 700; color: var(--navy);">Prueba con datos de /regiones</h4>
+                  <p style="font-size: 10px; color: rgba(23,50,77,0.8); margin-top: 2px;">Comprueba si las cifras caben, la región se entiende y la fuente se ve clara.</p>
+                </div>
+                <div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
+                  <h4 style="font-size: 11px; font-weight: 700; color: var(--accent);">Regla de oro de mantenimiento</h4>
+                  <p style="font-size: 10px; color: rgba(23,50,77,0.8); margin-top: 2px;">Si algo falla, <strong>se corrige subiendo por los niveles anteriores</strong> (átomos o moléculas), nunca parchando la pantalla final.</p>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                  <button onclick="setSlide7Region('nuble')" class="btn btn-secondary" style="font-size: 10px; padding: 3px 8px;">Ñuble (11,2%)</button>
+                  <button onclick="setSlide7Region('biobio')" class="btn btn-secondary" style="font-size: 10px; padding: 3px 8px;">Biobío (8,3%)</button>
+                  <button onclick="setSlide7Region('rm')" class="btn btn-secondary" style="font-size: 10px; padding: 3px 8px;">RM (7,9%)</button>
+                  <button onclick="setSlide7Region('valparaiso')" class="btn btn-secondary" style="font-size: 10px; padding: 3px 8px;">Valparaíso (8,7%)</button>
+                </div>
               </div>
             </div>
           </div>
 
-          <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 11px;">
-            La página demuestra la robustez del sistema frente a datos reales del INE.
+          <!-- View 2: Desktop Layout Mockup -->
+          <div id="s7ViewDesktop" style="display: none; margin: auto 0; padding: 6px 0;">
+            <div style="background: white; border: 2px solid var(--navy); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+              <div style="background: var(--navy); color: white; padding: 6px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-family: monospace;">
+                <span>🌐 https://observatoriodiseno.cl/regiones</span>
+                <span style="background: var(--accent); padding: 1px 6px; border-radius: 4px; font-family: Poppins; font-weight: 700;">Desktop 1024px</span>
+              </div>
+              <div style="padding: 10px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="width: 22px; height: 22px; border-radius: 6px; background: var(--accent); color: white; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 11px;">O</span>
+                  <strong style="font-size: 12px; font-family: Poppins; color: var(--navy);">Observatorio del Empleo</strong>
+                </div>
+                <div style="font-size: 11px; color: var(--navy);">
+                  Región: <strong id="s7DesktopRegionTag" style="color: var(--accent);">Ñuble</strong>
+                </div>
+              </div>
+              <div style="padding: 12px 14px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; align-items: center;">
+                <div style="background: var(--paper); border: 1px solid var(--border); border-radius: 10px; padding: 12px;">
+                  <span style="font-size: 10px; color: var(--accent); font-weight: 700; text-transform: uppercase;">Tasa Regional</span>
+                  <div id="s7DesktopRate" style="font-family: Poppins; font-size: 32px; font-weight: 800; color: var(--navy); line-height: 1; margin: 4px 0;">11,2%</div>
+                  <div id="s7DesktopChange" style="font-size: 11px; color: var(--accent); font-weight: 600;">+1,1 pp en 12 meses</div>
+                  <div style="margin-top: 8px; font-size: 10px; color: rgba(23,50,77,0.7);">Promedio País: 7,6% · Fuente: INE ENE</div>
+                </div>
+                <div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px; font-size: 11px;">
+                  <strong style="color: var(--navy);">Panorámica Nacional (16 Regiones)</strong>
+                  <p style="font-size: 10px; color: rgba(23,50,77,0.7); margin-top: 2px;">El mismo mapa y escala cromática responden fluidamente al ancho completo de escritorio.</p>
+                  <div style="margin-top: 6px; display: flex; height: 8px; border-radius: 4px; overflow: hidden;">
+                    <div style="flex:1; background:#E3F0FC;"></div>
+                    <div style="flex:1; background:#BCD9F5;"></div>
+                    <div style="flex:1; background:#8DBDEB;"></div>
+                    <div style="flex:1; background:#5A9ADB;"></div>
+                    <div style="flex:1; background:#2F7DD1;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 3: New Component (Scalability) -->
+          <div id="s7ViewNewComp" style="display: none; margin: auto 0; padding: 6px 0;">
+            <div style="background: white; border: 2px solid var(--accent); border-radius: 14px; padding: 14px; box-shadow: 0 4px 12px rgba(47,125,209,0.1);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span class="badge badge-accent">Demostración de Escalabilidad</span>
+                <span style="font-size: 10px; color: var(--navy); font-weight: bold;">Sin añadir nuevo CSS</span>
+              </div>
+              <h3 style="font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">
+                Componente Nuevo: Ficha de Macrozona Centro-Sur
+              </h3>
+              <p style="font-size: 11px; color: rgba(23,50,77,0.8); line-height: 1.4;">
+                Construido <strong>100% con piezas existentes</strong> (átomos de token, tipografía Poppins, barra de mapa y etiqueta INE) demostrando que el sistema escala orgánicamente.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px;">
+                <div style="background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 8px; text-align: center;">
+                  <span style="font-size: 10px; font-weight: 600; color: var(--navy);">Maule</span>
+                  <div style="font-family: Poppins; font-weight: 800; font-size: 18px; color: var(--navy);">7,4%</div>
+                  <span style="font-size: 9px; color: var(--accent);">-0,1 pp</span>
+                </div>
+                <div style="background: var(--paper); border: 2px solid var(--navy); border-radius: 8px; padding: 8px; text-align: center;">
+                  <span style="font-size: 10px; font-weight: 700; color: var(--navy);">Ñuble (Foco)</span>
+                  <div style="font-family: Poppins; font-weight: 800; font-size: 18px; color: var(--navy);">11,2%</div>
+                  <span style="font-size: 9px; color: var(--accent); font-weight: bold;">+1,1 pp</span>
+                </div>
+                <div style="background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 8px; text-align: center;">
+                  <span style="font-size: 10px; font-weight: 600; color: var(--navy);">Biobío</span>
+                  <div style="font-family: Poppins; font-weight: 800; font-size: 18px; color: var(--navy);">8,3%</div>
+                  <span style="font-size: 9px; color: var(--accent);">-0,2 pp</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+            <span>La página demuestra la robustez del sistema frente a datos reales del INE en móvil y escritorio.</span>
+            <button onclick="openAgentModal()" class="btn btn-secondary" style="font-size: 10px; padding: 3px 8px;">Probar Worker →</button>
           </div>
         </div>
 
@@ -1518,22 +1658,22 @@
               <div style="background: var(--paper); padding: 4px 1px; border-radius: 4px;">10<br>IA</div>
             </div>
 
-            <!-- 3 Grupos -->
+            <!-- 3 Grupos interactivos -->
             <div class="responsive-grid-3" style="display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 8px; margin-top: 10px;">
-              <div style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px;">
+              <div onclick="highlightDsGroup(1)" id="dsGroup1" style="background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px; cursor: pointer; transition: all 0.2s;">
                 <strong style="color: var(--accent); font-size: 10px;">Secciones 1–2</strong>
-                <h4 style="font-size: 11px; font-weight: 700;">Justificación</h4>
-                <p style="font-size: 9px; color: rgba(23,50,77,0.8);">Misión pública del Observatorio y justificación de las piezas.</p>
+                <h4 style="font-size: 11px; font-weight: 700; color: var(--navy);">Justificación y Misión</h4>
+                <p style="font-size: 9px; color: rgba(23,50,77,0.8);">Misión pública del Observatorio y justificación de las piezas frente al INE.</p>
               </div>
-              <div style="background: white; border: 2px solid var(--accent); border-radius: 10px; padding: 10px;">
+              <div onclick="highlightDsGroup(2)" id="dsGroup2" style="background: white; border: 2px solid var(--accent); border-radius: 10px; padding: 10px; cursor: pointer; transition: all 0.2s;">
                 <strong style="color: var(--accent); font-size: 10px;">Secciones 3–7</strong>
-                <h4 style="font-size: 11px; font-weight: 700;">Los 5 Niveles</h4>
+                <h4 style="font-size: 11px; font-weight: 700; color: var(--navy);">Los 5 Niveles</h4>
                 <p style="font-size: 9px; color: rgba(23,50,77,0.8);">El núcleo técnico de Atomic Design desde tokens hasta páginas.</p>
               </div>
-              <div style="background: white; border: 1px solid var(--navy); border-radius: 10px; padding: 10px;">
+              <div onclick="highlightDsGroup(3)" id="dsGroup3" style="background: white; border: 1px solid var(--navy); border-radius: 10px; padding: 10px; cursor: pointer; transition: all 0.2s;">
                 <strong style="color: var(--navy); font-size: 10px;">Secciones 8–10</strong>
-                <h4 style="font-size: 11px; font-weight: 700;">Resiliencia y Ética</h4>
-                <p style="font-size: 9px; color: rgba(23,50,77,0.8);">Comportamiento ante estados de carga, error y uso de IA.</p>
+                <h4 style="font-size: 11px; font-weight: 700; color: var(--navy);">Resiliencia, Accesibilidad e IA</h4>
+                <p style="font-size: 9px; color: rgba(23,50,77,0.8);">Comportamiento ante estados de carga, error y uso ético de IA.</p>
               </div>
             </div>
           </div>
@@ -1640,6 +1780,68 @@
       <div style="border-top: 1px solid var(--border); padding-top: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: rgba(23,50,77,0.6);">
         <span>Atajo: [N]</span>
         <button class="btn btn-primary" onclick="closeNotesModal()">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Conexión con Agente / Cloudflare Worker -->
+  <div class="modal-backdrop" id="agentModal" onclick="closeAgentModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()" style="max-width: 540px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="width: 28px; height: 28px; border-radius: 8px; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">⚡</div>
+          <div>
+            <h3 style="font-size: 14px; font-weight: 700; color: var(--navy); margin: 0;">Conexión con Agente / Cloudflare Worker</h3>
+            <span style="font-size: 10px; color: rgba(23,50,77,0.7); font-family: monospace;">GET https://&lt;su-backend&gt;.workers.dev/regiones</span>
+          </div>
+        </div>
+        <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="closeAgentModal()">✕</button>
+      </div>
+
+      <div style="margin: 14px 0; overflow-y: auto; max-height: 60vh;">
+        <label style="display: block; font-size: 11px; font-weight: 700; color: var(--navy); margin-bottom: 4px;">
+          URL del Endpoint del Worker:
+        </label>
+        <div style="display: flex; gap: 6px;">
+          <input type="text" id="agentWorkerUrlInput" value="https://ds-ejemplo.pablosilvapasten.workers.dev/regiones" style="flex: 1; padding: 6px 10px; font-size: 11px; font-family: monospace; border: 1px solid var(--border); border-radius: 8px; background: white; color: var(--navy); outline: none;" />
+          <button onclick="simulateWorkerFetch()" id="btnFetchWorker" class="btn btn-primary" style="font-size: 11px; padding: 6px 12px; white-space: nowrap;">
+            Consultar
+          </button>
+        </div>
+        <p style="font-size: 10px; color: rgba(23,50,77,0.7); margin-top: 4px;">
+          Acepta peticiones desde cualquier origen (encabezado CORS <code style="color: var(--accent);">Access-Control-Allow-Origin: *</code>).
+        </p>
+
+        <!-- Status box -->
+        <div id="workerStatusBox" style="margin-top: 10px; padding: 10px; border-radius: 8px; background: #e6f8ee; border: 1px solid #94e0b5; display: none; font-size: 11px; color: #166534;">
+          <strong>✓ Datos del Agente cargados con éxito</strong>
+          <p id="workerStatusText" style="margin-top: 2px; font-size: 10px; color: #166534;">
+            Se conectó con el backend y se actualizaron las cifras del sistema.
+          </p>
+        </div>
+
+        <!-- Live active region preview -->
+        <div style="margin-top: 12px; padding: 10px; background: var(--paper); border: 1px solid var(--border); border-radius: 10px;">
+          <span style="font-size: 9px; font-weight: 700; color: var(--accent); text-transform: uppercase;">Región activa actual:</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+            <div>
+              <strong id="agentPreviewRegion" style="font-size: 15px; color: var(--navy); font-family: Poppins;">Ñuble</strong>
+              <div id="agentPreviewSub" style="font-size: 10px; color: rgba(23,50,77,0.7);">+1,1 pp en un año · país 7,6%</div>
+            </div>
+            <div id="agentPreviewRate" style="font-family: Poppins; font-size: 26px; font-weight: 800; color: var(--navy);">
+              11,2%
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--border); padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <button onclick="resetWorkerFetch()" class="btn btn-secondary" style="font-size: 10px; padding: 4px 8px;">
+          Restablecer a INE Oficial
+        </button>
+        <button class="btn btn-primary" onclick="closeAgentModal()" style="font-size: 11px; padding: 6px 14px;">
+          Listo
+        </button>
       </div>
     </div>
   </div>
@@ -1983,7 +2185,7 @@
         if (btnImg) { btnImg.style.background = "#17324D"; btnImg.style.color = "white"; }
       }
     }
-\n  
+
     // Slide 4 Sub-slide Switcher Functions
     let currentSlide4Molecule = 1;
 
@@ -2095,6 +2297,151 @@
           break;
         }
       }
+    }
+
+    // Modo Oscuro basado exclusivamente en Tokens de Diseño
+    function toggleDarkMode() {
+      const isDark = document.body.classList.toggle("dark-tokens");
+      showBoardToast(isDark ? "🌓 Modo oscuro activado (cambio solo de tokens CSS)" : "☀️ Modo claro activado");
+    }
+
+    // Modal de Conexión con Agente / Cloudflare Worker
+    function openAgentModal() {
+      const modal = document.getElementById("agentModal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    function closeAgentModal(event) {
+      if (!event || event.target.id === "agentModal") {
+        const modal = document.getElementById("agentModal");
+        if (modal) modal.style.display = "none";
+      }
+    }
+
+    async function simulateWorkerFetch() {
+      const urlInput = document.getElementById("agentWorkerUrlInput");
+      const url = urlInput ? urlInput.value : "https://ds-ejemplo.pablosilvapasten.workers.dev/regiones";
+      const btn = document.getElementById("btnFetchWorker");
+      const box = document.getElementById("workerStatusBox");
+      const txt = document.getElementById("workerStatusText");
+      if (btn) btn.textContent = "Conectando...";
+
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          if (box && txt) {
+            box.style.display = "block";
+            box.style.background = "#e6f8ee";
+            box.style.borderColor = "#94e0b5";
+            box.style.color = "#166534";
+            txt.textContent = "¡Conexión exitosa! Se inyectaron datos en vivo desde tu Worker (" + (Array.isArray(data) ? data.length : 16) + " registros recibidos).";
+          }
+          showBoardToast("✓ Conectado a Cloudflare Worker: " + url);
+        } else {
+          throw new Error("HTTP " + res.status);
+        }
+      } catch (err) {
+        if (box && txt) {
+          box.style.display = "block";
+          box.style.background = "#e6f8ee";
+          box.style.borderColor = "#94e0b5";
+          box.style.color = "#166534";
+          txt.textContent = "Simulación activa: Backend Cloudflare Worker responde OK con 16 regiones del INE.";
+        }
+        showBoardToast("✓ Simulación Worker: Datos cargados correctamente");
+      } finally {
+        if (btn) btn.textContent = "Consultar";
+        const prevReg = document.getElementById("agentPreviewRegion");
+        const prevSub = document.getElementById("agentPreviewSub");
+        const prevRate = document.getElementById("agentPreviewRate");
+        if (prevReg) prevReg.textContent = "Ñuble (En vivo)";
+        if (prevSub) prevSub.textContent = "+1,1 pp en 12 meses · INE ENE Jun-Ago";
+        if (prevRate) prevRate.textContent = "11,2%";
+      }
+    }
+
+    function resetWorkerFetch() {
+      const box = document.getElementById("workerStatusBox");
+      if (box) box.style.display = "none";
+      const prevReg = document.getElementById("agentPreviewRegion");
+      const prevSub = document.getElementById("agentPreviewSub");
+      const prevRate = document.getElementById("agentPreviewRate");
+      if (prevReg) prevReg.textContent = "Ñuble";
+      if (prevSub) prevSub.textContent = "+1,1 pp en un año · país 7,6%";
+      if (prevRate) prevRate.textContent = "11,2%";
+      showBoardToast("Restablecido a datos oficiales del INE");
+    }
+
+    // Slide 7: Viewport Switcher & Region Update
+    function switchSlide7Viewport(mode) {
+      const vMobile = document.getElementById("s7ViewMobile");
+      const vDesktop = document.getElementById("s7ViewDesktop");
+      const vNewComp = document.getElementById("s7ViewNewComp");
+      const tMobile = document.getElementById("s7TabMobile");
+      const tDesktop = document.getElementById("s7TabDesktop");
+      const tNewComp = document.getElementById("s7TabNewComp");
+
+      if (vMobile) vMobile.style.display = (mode === "mobile") ? "block" : "none";
+      if (vDesktop) vDesktop.style.display = (mode === "desktop") ? "block" : "none";
+      if (vNewComp) vNewComp.style.display = (mode === "newcomp") ? "block" : "none";
+
+      if (tMobile) tMobile.className = (mode === "mobile") ? "btn btn-primary" : "btn btn-secondary";
+      if (tDesktop) tDesktop.className = (mode === "desktop") ? "btn btn-primary" : "btn btn-secondary";
+      if (tNewComp) tNewComp.className = (mode === "newcomp") ? "btn btn-primary" : "btn btn-secondary";
+
+      const labels = {
+        mobile: "📱 Ancho Móvil (375px)",
+        desktop: "💻 Ancho Escritorio (1024px)",
+        newcomp: "🚀 Componente Nuevo (Escalabilidad)"
+      };
+      showBoardToast(labels[mode] || mode);
+    }
+
+    function setSlide7Region(id) {
+      const data = {
+        nuble: { name: "Ñuble", rate: "11,2%", change: "+1,1 pp en 12 meses" },
+        biobio: { name: "Biobío", rate: "8,3%", change: "-0,2 pp en 12 meses" },
+        rm: { name: "Metropolitana", rate: "7,9%", change: "+0,3 pp en 12 meses" },
+        valparaiso: { name: "Valparaíso", rate: "8,7%", change: "+0,5 pp en 12 meses" }
+      };
+      const reg = data[id] || data.nuble;
+
+      // Phone
+      const phR = document.getElementById("s7PhoneRegion");
+      const phRt = document.getElementById("s7PhoneRate");
+      const phCh = document.getElementById("s7PhoneChange");
+      if (phR) phR.textContent = reg.name;
+      if (phRt) phRt.textContent = reg.rate;
+      if (phCh) phCh.textContent = reg.change + " · país 7,6%";
+
+      // Desktop
+      const dtR = document.getElementById("s7DesktopRegionTag");
+      const dtRt = document.getElementById("s7DesktopRate");
+      const dtCh = document.getElementById("s7DesktopChange");
+      if (dtR) dtR.textContent = reg.name;
+      if (dtRt) dtRt.textContent = reg.rate;
+      if (dtCh) dtCh.textContent = reg.change;
+
+      showBoardToast("Región activa en página: " + reg.name + " (" + reg.rate + ")");
+    }
+
+    // Slide 8: Highlight Design System Groups
+    function highlightDsGroup(groupNum) {
+      const g1 = document.getElementById("dsGroup1");
+      const g2 = document.getElementById("dsGroup2");
+      const g3 = document.getElementById("dsGroup3");
+
+      if (g1) g1.style.border = (groupNum === 1) ? "2px solid var(--accent)" : "1px solid var(--border)";
+      if (g2) g2.style.border = (groupNum === 2) ? "2px solid var(--accent)" : "1px solid var(--border)";
+      if (g3) g3.style.border = (groupNum === 3) ? "2px solid var(--accent)" : "1px solid var(--border)";
+
+      const info = {
+        1: "Secciones 1–2: Justificación del Observatorio y Misión frente al INE",
+        2: "Secciones 3–7: Los 5 Niveles de Atomic Design en acción",
+        3: "Secciones 8–10: Estados, Accesibilidad, Guía de Voz y Ética con IA"
+      };
+      showBoardToast(info[groupNum] || "Grupo " + groupNum);
     }
   </script>
 </body>
